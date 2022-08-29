@@ -4,29 +4,44 @@
 //  * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less.
 
-// Function Expression
+var fightOrSkip = function () {
+  var promptFight = prompt(
+    "Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose."
+  );
+  
+  if (promptFight === "" || promptFight === null) {
+    alert("You need to provide a valid answer! Please try again.");
+    return fightOrSkip();
+  }
+  // Convert inputted prompt to lowercase.
+  promptFight = promptFight.toLowerCase();
+
+  // if player picks "skip" confirm and then stop the loop.
+  if (promptFight === "skip") {
+    // confirm player wants to skip.
+    var confirmSkip = confirm("Are you sure you'd like to quit?");
+    // if yes (true), leave fight.
+    if (confirmSkip) {
+      alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+      // subtract money from playerInfo.money for skipping.
+      playerInfo.money = Math.max(0, playerInfo.money - 2);
+      return true;
+    }
+  }
+  return false;
+};
+
+// A fight function expression that handles the fighting logic.
 var fight = function (enemy) {
   // console.log(enemy);
 
   // repeat and execute as long as the enemy-robot is alive.
   while (playerInfo.health > 0 && enemy.health > 0) {
-    var promptFight = prompt(
-      "Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose."
-    );
-
-    // if player picks "skip" confirm and then stop the loop.
-    if (promptFight === "skip" || promptFight === "SKIP") {
-      // confirm player wants to skip.
-      var confirmSkip = confirm("Are you sure you'd like to quit?");
-      // if yes (true), leave fight.
-      if (confirmSkip) {
-        alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-        // subtract money from playerInfo.money for skipping.
-        playerInfo.money = Math.max(0, playerInfo.money - 2);
-        console.log("playerInfo.money", playerInfo.money);
-        break;
-      }
+    // ask player if they'd like to fight or skip using fightOrSkip Function.
+    if (fightOrSkip()){
+      break;
     }
+
     // generate random damage value based on players attack power.
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
@@ -89,7 +104,6 @@ var startGame = function () {
   playerInfo.reset();
 
   for (var i = 0; i < enemyInfo.length; i++) {
-    
     if (playerInfo.health > 0) {
       // lets the player know what round they are in.
       alert("Welcome to Robot Gladiators! Round " + (i + 1));
@@ -183,10 +197,10 @@ var randomNumber = function (min, max) {
   return value;
 };
 
-var getPlayerName = function (){
+var getPlayerName = function () {
   var name = "";
 
-  while (name === "" || name === null){
+  while (name === "" || name === null) {
     name = prompt("What is your robot's name?");
   }
 
