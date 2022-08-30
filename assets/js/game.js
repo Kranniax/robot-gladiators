@@ -158,6 +158,26 @@ var endGame = function () {
         playerInfo.money +
         "."
     );
+
+    var currentHighScore = localStorage.getItem("highscore");
+    if (currentHighScore === null) {
+      currentHighScore = 0;
+    }
+
+    if (playerInfo.money > currentHighScore) {
+      localStorage.setItem("highscore", playerInfo.money);
+      localStorage.setItem("name", playerInfo.name);
+      alert(
+        playerInfo.name + " now has the high score of " + playerInfo.money + "!"
+      );
+    } else {
+      alert(
+        playerInfo.name +
+          " did not beat the high score of " +
+          highScore +
+          ". Maybe next time!"
+      );
+    }
   } else {
     alert("You've lost your robot in battle.");
   }
