@@ -2,9 +2,9 @@
 
 ## Description
 
-An online JavaScript based game, build within the browser, that I entered for fictional hackathon called the Con Solo Game Jam.
+An online JavaScript based game, build within the browser, that I entered for a fictional hackathon called the Con Solo Game Jam.
 
-![Alt text](/assets/images/kranniax-github-io-1920x1080desktop-90d38e.png)
+![Alt text](/assets/images/Screenshot%202022-10-02%20101729.jpg)
 
 ## Technologies Used
 
